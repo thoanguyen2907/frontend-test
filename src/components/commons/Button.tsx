@@ -17,7 +17,7 @@ type SizeType = keyof typeof sizeStyles
 
 type ButtonProps = {
   label: string
-  onClick: () => void
+  onClick?: () => void
   type: "button" | "submit"
   variant?: VariantType
   size?: SizeType

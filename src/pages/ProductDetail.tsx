@@ -1,6 +1,7 @@
 import Card from '@/components/commons/Card'
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks'
 import { clearProduct, fetchOneProductAsync } from '@/redux/reducers/productDetailReducer'
+import { Product } from '@/types/Product'
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -23,8 +24,8 @@ export default function ProductDetail() {
     }
   }, [id, dispatch])
 
-  const editProduct = (id: string) => {
-    navigate(`/products/edit/${id}`)
+  const editProduct = (id: string, product: Product) => {
+    navigate(`/products/edit/${id}`,  { state: product })
   }
 
   if (isLoading) {
@@ -43,7 +44,7 @@ export default function ProductDetail() {
         price={product.price}
         model={product.model}
         button={{ type: 'button', label: 'Edit' }}
-        onHandler={() => editProduct(product.id)}
+        onHandler={() => editProduct(product.id, product)}
       />
     </div>
   )
