@@ -5,6 +5,7 @@ import { Product } from '../../types/Product'
 import { PaginationQuery } from '../../types/PaginationQuery'
 
 const API_URL = "http://localhost:8080/api/v1/products"
+
 const initialState: {
   products: Product[]
   error?: string | unknown
@@ -14,15 +15,14 @@ const initialState: {
   isLoading: false
 }
 
-
-
 export const fetchAllProductAsync = createAsyncThunk<
-  Product[], // The expected resolved data type
+  Product[],
   PaginationQuery
->('fetchAllProductAsync', async ({ limit, offset }, { rejectWithValue }) => {
+>('fetchAllProductAsync', async ({ limit, offset, signal }, { rejectWithValue }) => {
   try {
     const result = await axios.get<any, AxiosResponse<Product[]>>(
       `${API_URL}?offset=${offset}&limit=${limit}`
+      , { signal }
     )
     return result.data?.details?.records
   } catch (err) {
@@ -30,6 +30,7 @@ export const fetchAllProductAsync = createAsyncThunk<
     return rejectWithValue(message)
   }
 })
+
 
 const productsSlice = createSlice({
   name: 'products',

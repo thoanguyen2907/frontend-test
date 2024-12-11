@@ -2,6 +2,7 @@
  import Root from "@/pages/Root";
 import HomePage from "@/pages/HomePage";
 import ProductDetail from "@/pages/ProductDetail";
+import EditProductForm from "@/pages/EditProductForm";
 
  export const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ import ProductDetail from "@/pages/ProductDetail";
     {
       path: "/products/:id", 
       element: <ProductDetail/>
+    }, 
+     {
+      path: "/products/edit/:id", 
+      element: <EditProductForm/>
     }
       ]
     }

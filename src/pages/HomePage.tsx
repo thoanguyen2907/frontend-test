@@ -1,27 +1,32 @@
 import Card from '@/components/commons/Card'
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks'
 import { fetchAllProductAsync } from '@/redux/reducers/productsReducer'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function HomePage() {
-  const { isLoading, error, products } = useAppSelector((state) => state.productReducer)
-  const dispatch = useAppDispatch()
+  const { isLoading, products } = useAppSelector((state) => state.productReducer)
 
-  console.log('products ', products)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate(); 
 
   useEffect(() => {
-    dispatch(fetchAllProductAsync({ offset: 0, limit: 10 }))
+    const controller = new AbortController(); 
+    const { signal } = controller;
+
+    dispatch(fetchAllProductAsync({ offset: 0, limit: 10, signal }))
+
+    return () => {
+     controller.abort(); 
+    };
   }, [])
 
-  const showDetail = () => {
-    alert('show detail of item')
-  }
+  const showDetail = (id: string) => {
+    navigate(`products/${id}`)
 
-  if (isLoading) {
-    return <p>Loading ...</p>
   }
-  if (error) {
-    return <p>Error happens !!!</p>
+  if(isLoading) {
+    return <p>Loading ...</p>
   }
 
   return (
@@ -32,11 +37,13 @@ export default function HomePage() {
           products.map((item) => {
             return (
               <Card
+              key={item.id}
                 title={item.model}
                 description={item.brand}
                 price={item.price}
                 model={item.model}
-                button={{ type: 'button', label: 'More Details', onClick: showDetail }}
+                button={{ type: 'button', label: 'More Details' }}
+                onHandler={() => showDetail(item.id)} 
               />
             )
           })}
