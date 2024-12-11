@@ -8,12 +8,12 @@ interface CardProps {
     model: string 
     button: {
         label: string, 
-        onClick: () => void
         type: "button" | "submit"
     }
+    onHandler: () => void;
 }
 
-export default function Card({ title, description, model, price, button }: CardProps) {
+export default function Card({ title, description, model, price, button, onHandler }: CardProps) {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 max-w-sm border border-gray-200">
       <h2 className="text-lg font-bold text-gray-800">{title}</h2>
@@ -22,7 +22,7 @@ export default function Card({ title, description, model, price, button }: CardP
       <div className="text-xl font-semibold text-gray-900 mt-4">${price}</div>
       <div className="mt-4">
         <Button
-          onClick={button.onClick}
+          onClick={onHandler}
           type={button.type}
           label={button.label}
         />

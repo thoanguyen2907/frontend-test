@@ -1,4 +1,5 @@
 export interface PaginationQuery {
     limit: number
-    offset: number
+    offset: number, 
+    signal: AbortSignal
 }
