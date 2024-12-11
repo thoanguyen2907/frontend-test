@@ -9,3 +9,4 @@ export type Product = {
   numberOfFans: number
   price: number
 }
+export type ProductEdit = Omit<Product, "id">;

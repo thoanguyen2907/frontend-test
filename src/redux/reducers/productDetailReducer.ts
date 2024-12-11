@@ -22,7 +22,6 @@ export const fetchOneProductAsync = createAsyncThunk(
       `${API_URL}/${id}`,
       { signal }
     )
-    
     return result.data
   } catch (err) {
     const message = err instanceof Error ? err.message : 'error occurred'
