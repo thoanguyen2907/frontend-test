@@ -4,7 +4,7 @@ import Button from './Button'
 interface CardProps {
     title: string
     description: string
-    price: string 
+    price: number 
     model: string 
     button: {
         label: string, 
