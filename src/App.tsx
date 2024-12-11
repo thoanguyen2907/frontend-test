@@ -1,10 +1,10 @@
 import React from 'react'
-import HomePage from './pages/HomePage'
+
+import { RouterProvider } from 'react-router-dom'
+import { router } from './router/router'
 
 export default function App() {
   return (
-    <div>
-      <HomePage/>
-    </div>
+      <RouterProvider router = {router}/>
   )
 }
