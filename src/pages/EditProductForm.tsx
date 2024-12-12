@@ -1,9 +1,10 @@
 import Button from '@/components/commons/Button'
 import Input from '@/components/commons/Input'
+
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks'
-import { fetchOneProductAsync } from '@/redux/reducers/productDetailReducer'
 import { editProductAsync } from '@/redux/reducers/productsReducer'
 import { ProductEdit } from '@/types/Product'
+
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 

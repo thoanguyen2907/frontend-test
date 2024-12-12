@@ -8,11 +8,13 @@ const API_URL = 'http://localhost:8080/api/v1/products'
 
 const initialState: {
   products: Product[]
+  product: Product | null
   productEdit: ProductEdit | null
   error?: string | unknown
   isLoading: boolean
 } = {
   products: [],
+  product: null,
   productEdit: null,
   isLoading: false
 }
@@ -44,11 +46,30 @@ export const editProductAsync = createAsyncThunk(
     }
   }
 )
-
+export const fetchOneProductAsync = createAsyncThunk(
+  'fetchOneProductAsync',
+   async ({ id, signal }: { id: string; signal: AbortSignal }, { rejectWithValue }) => {
+  try {
+    const result = await axios.get<any, AxiosResponse<Product>>(
+      `${API_URL}/${id}`,
+      { signal }
+    )
+    return result.data
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'error occurred'
+    return rejectWithValue(message)
+  }
+})
 const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    clearProduct: (state) => {
+      state.product = initialState.product;
+      state.error = undefined;
+      state.isLoading = false;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAllProductAsync.fulfilled, (state, action) => {
       state.products = action.payload
@@ -79,9 +100,27 @@ const productsSlice = createSlice({
     builder.addCase(editProductAsync.rejected, (state) => {
       state.isLoading = false
     })
+builder.addCase(fetchOneProductAsync.fulfilled, (state, action) => {
+      state.product = action.payload
+      state.isLoading = false
+      state.error = undefined
+    })
+    builder.addCase(fetchOneProductAsync.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true
+      }
+    })
+    builder.addCase(fetchOneProductAsync.rejected, (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload || 'failed to fetch products'
+      }
+    })
   }
 })
 
 const productReducer = productsSlice.reducer
-
+export const { clearProduct } = productsSlice.actions;
 export default productReducer
