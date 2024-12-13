@@ -1,13 +1,13 @@
 import Card from '@/components/commons/Card'
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks'
-import { clearProduct, fetchOneProductAsync } from '@/redux/reducers/productDetailReducer'
+import { clearProduct, fetchOneProductAsync } from '@/redux/reducers/productsReducer'
 import { Product } from '@/types/Product'
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 export default function ProductDetail() {
   const { id } = useParams<string>()
-  const { isLoading, product } = useAppSelector((state) => state.productDetailReducer)
+  const { product, isLoading } = useAppSelector((state) => state.productReducer)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -28,24 +28,22 @@ export default function ProductDetail() {
     navigate(`/products/edit/${id}`,  { state: product })
   }
 
-  if (isLoading) {
-    return <p>Loading...</p>
-  }
-
-  if (!product) {
-    return <p>Product not found.</p>
+  if (isLoading || !product) {
+    return <p>loading ... </p>
   }
 
   return (
-    <div>
-      <Card
-        title={product.model}
-        description={product.brand}
-        price={product.price}
-        model={product.model}
-        button={{ type: 'button', label: 'Edit' }}
-        onHandler={() => editProduct(product.id, product)}
-      />
-    </div>
+<div className="flex items-center justify-center min-h-screen">
+  <div className="w-96 p-6 bg-white rounded-lg shadow-lg">
+    <Card
+      title={product.model}
+      description={product.brand}
+      price={product.price}
+      model={product.model}
+      button={{ type: 'button', label: 'Edit' }}
+      onHandler={() => editProduct(product.id, product)}
+    />
+  </div>
+</div>
   )
 }

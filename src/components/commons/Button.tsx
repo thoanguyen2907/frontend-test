@@ -3,7 +3,8 @@ import React from 'react'
 const variantStyles = {
   primary: 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-400',
   secondary: 'bg-gray-300 text-gray-800 hover:bg-gray-400 focus:ring-gray-200',
-  danger: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-400'
+  danger: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-400',
+  black: "bg-black text-white hover:bg-gray-900"
 } as const
 
 const sizeStyles = {
@@ -26,7 +27,7 @@ export default function Button({
   label = 'More details',
   onClick,
   type = "button",
-  variant = "primary",
+  variant = "black",
   size = "medium"
 } : ButtonProps) {
   return (

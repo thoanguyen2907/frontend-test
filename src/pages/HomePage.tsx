@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function HomePage() {
-  const { isLoading, products } = useAppSelector((state) => state.productReducer)
+  const { products, isLoading } = useAppSelector((state) => state.productReducer)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate(); 
@@ -23,17 +23,16 @@ export default function HomePage() {
 
   const showDetail = (id: string) => {
     navigate(`products/${id}`)
-
-  }
-  if(isLoading) {
-    return <p>Loading ...</p>
   }
 
+  if(products.length === 0 || isLoading) {
+    return <p>loading ...</p>
+  }
   return (
     <div>
       <h1 className="text-4xl font-extrabold text-blue-600 text-center mb-8 shadow-md">Products</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products &&
+        {products.length > 0 &&
           products.map((item) => {
             return (
               <Card

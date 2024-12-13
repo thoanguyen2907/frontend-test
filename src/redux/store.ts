@@ -1,13 +1,15 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import productReducer from "./reducers/productsReducer";
-import productDetailReducer from "./reducers/productDetailReducer";
 
-const store = configureStore({
+export const createStore = (initialState = {}) => {
+  return configureStore({
     reducer: {
-        productReducer, 
-        productDetailReducer
-    }
-})
+      productReducer,
+    },
+    preloadedState: initialState,
+  });
+};
+export const store = createStore(); 
 
 export default store
 
