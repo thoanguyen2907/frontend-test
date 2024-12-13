@@ -40,7 +40,7 @@ export default function HomePage() {
                 title={item.model}
                 description={item.brand}
                 price={item.price}
-                model={item.model}
+                model={item.socket}
                 button={{ type: 'button', label: 'More Details' }}
                 onHandler={() => showDetail(item.id)} 
               />
