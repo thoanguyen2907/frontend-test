@@ -10,3 +10,5 @@ export type Product = {
   price: number
 }
 export type ProductEdit = Omit<Product, "id">;
+
+export type UpdateProduct = Partial<ProductEdit>; 
