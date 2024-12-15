@@ -34,7 +34,7 @@ export default function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`${variantStyles[variant]} ${sizeStyles[size]}`}>
+      className={`mt-3 ${variantStyles[variant]} ${sizeStyles[size]}`}>
       {label}
     </button>
   )

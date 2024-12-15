@@ -1,4 +1,5 @@
 import Card from '@/components/commons/Card'
+import Loading from '@/components/commons/Loading'
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks'
 import { fetchAllProductAsync } from '@/redux/reducers/productsReducer'
 import { useEffect } from 'react'
@@ -26,7 +27,7 @@ export default function HomePage() {
   }
 
   if(products.length === 0 || isLoading) {
-    return <p>loading ...</p>
+    return <Loading/>
   }
   return (
     <div>

@@ -7,8 +7,6 @@ export default function Root() {
       <header>
         <nav>
           <Link to="/"> Home page </Link>
-          <Link to="/about"> About page</Link>
-          <Link to="/contact"> Contact page</Link>
         </nav>
       </header>
       <Outlet/>

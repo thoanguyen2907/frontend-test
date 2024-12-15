@@ -1,4 +1,5 @@
 import Card from '@/components/commons/Card'
+import Loading from '@/components/commons/Loading'
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks'
 import { clearProduct, fetchOneProductAsync } from '@/redux/reducers/productsReducer'
 import { Product } from '@/types/Product'
@@ -29,17 +30,21 @@ export default function ProductDetail() {
   }
 
   if (isLoading || !product) {
-    return <p>loading ... </p>
+    return <Loading />
   }
 
   return (
 <div className="flex items-center justify-center min-h-screen">
   <div className="w-96 p-6 bg-white rounded-lg shadow-lg">
     <Card
-      title={product.model}
-      description={product.brand}
+      model={product.model}
+      brand={product.brand}
       price={product.price}
-      model={product.socket}
+      socket={product.socket}
+      fanSize={product.fanSize}
+      fanSpeed={product.fanSpeed}
+      fanNoiseLevel={product.fanNoiseLevel}
+      numberOfFans={product.numberOfFans}
       button={{ type: 'button', label: 'Edit' }}
       onHandler={() => editProduct(product.id, product)}
     />

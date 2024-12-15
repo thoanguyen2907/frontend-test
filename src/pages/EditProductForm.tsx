@@ -57,43 +57,50 @@ export default function EditProductForm() {
   if (isLoading) {
     return <p>Loading ...</p>
   }
+  console.log('socket ', product.socket)
   return (
-    <div>
-      <h2>Edit Product Form</h2>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-lg px-4">
+        <h2 className="text-center font-bold text-xl">Edit Product Form</h2>
 
-      <form onSubmit={handleSubmit}>
-        <Input label={'Model'} name={'model'} value={product.model} onChange={handleChange} />
-        <Input label={'Brand'} name={'brand'} value={product.brand} onChange={handleChange} />
-        <Input
-          label={'Fan Size'}
-          name={'fanSize'}
-          value={product.fanSize}
-          onChange={handleChange}
-        />
-        <Input
-          label={'Fan Speed'}
-          name={'fanSpeed'}
-          value={product.fanSpeed}
-          onChange={handleChange}
-        />
-        <Input
-          label={'Fan Noise Level'}
-          name={'fanNoiseLevel'}
-          value={product.fanNoiseLevel}
-          onChange={handleChange}
-        />
-        <Dropdown label={"Socket type"} name={"socket"} value = {product.socket}
-        onChange={handleChange} options={sockets}
-        />
-        <Input
-          label={'Number of fans'}
-          name={'numberOfFans'}
-          value={product.numberOfFans}
-          onChange={handleChange}
-        />
-        <Input label={'Price'} name={'price'} value={product.price} onChange={handleChange} />
-        <Button label={'submit'} type={'submit'} />
-      </form>
+        <form onSubmit={handleSubmit}>
+          <Input label={'Model'} name={'model'} value={product.model} onChange={handleChange} />
+          <Input label={'Brand'} name={'brand'} value={product.brand} onChange={handleChange} />
+          <Input
+            label={'Fan Size'}
+            name={'fanSize'}
+            value={product.fanSize}
+            onChange={handleChange}
+          />
+          <Input
+            label={'Fan Speed'}
+            name={'fanSpeed'}
+            value={product.fanSpeed}
+            onChange={handleChange}
+          />
+          <Input
+            label={'Fan Noise Level'}
+            name={'fanNoiseLevel'}
+            value={product.fanNoiseLevel}
+            onChange={handleChange}
+          />
+          <Dropdown
+            label={'Socket type'}
+            name={'socket'}
+            value={product.socket}
+            onChange={handleChange}
+            options={sockets}
+          />
+          <Input
+            label={'Number of fans'}
+            name={'numberOfFans'}
+            value={product.numberOfFans}
+            onChange={handleChange}
+          />
+          <Input label={'Price'} name={'price'} value={product.price} onChange={handleChange} />
+          <Button label={'submit'} type={'submit'} />
+        </form>
+      </div>
     </div>
   )
 }
