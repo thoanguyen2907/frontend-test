@@ -52,7 +52,7 @@ export default function EditProductForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(editProductAsync({ editProduct: product, id }))
-    navigate('/')
+    navigate(`/products/${id}`)
   }
   if (isLoading) {
     return <p>Loading ...</p>
