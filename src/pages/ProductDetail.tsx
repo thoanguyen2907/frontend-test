@@ -39,7 +39,7 @@ export default function ProductDetail() {
       title={product.model}
       description={product.brand}
       price={product.price}
-      model={product.model}
+      model={product.socket}
       button={{ type: 'button', label: 'Edit' }}
       onHandler={() => editProduct(product.id, product)}
     />
