@@ -1,10 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
 
 import { PaginationQuery } from '../../types/PaginationQuery'
 import { Socket } from '@/types/Socket'
-
-const API_URL = 'http://localhost:8080/api/v1/sockets'
+import { API_URL } from '@/utils/constant'
 
 const initialState: {
   sockets: Socket[]
@@ -34,8 +33,7 @@ export const fetchAllSocketAsync = createAsyncThunk<Socket[], PaginationQuery>(
 const socketsSlice = createSlice({
   name: 'sockets',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllSocketAsync.fulfilled, (state, action) => {
       state.sockets = action.payload

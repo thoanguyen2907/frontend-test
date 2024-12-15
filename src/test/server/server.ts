@@ -1,10 +1,12 @@
 import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
+
 import { productsData } from '../data/productsData'
-import { Product, ProductEdit, UpdateProduct } from '@/types/Product'
+import { Product, ProductEdit } from '@/types/Product'
+import { API_URL } from '@/utils/constant'
 
 export const handlers = [
-  http.patch('http://localhost:8080/api/v1/products/:id', async ({ request, params }) => {
+  http.patch(`${API_URL}/:id`, async ({ request, params }) => {
     console.log('catch the request')
     const update = (await request.json()) as ProductEdit
     const { id } = params
@@ -17,7 +19,7 @@ export const handlers = [
       })
     }
   }),
-  http.get('http://localhost:8080/api/v1/products/:id', async ({ request, params }) => {
+  http.get(`${API_URL}/:id`, async ({ request, params }) => {
     const { id } = params
     const productDetail: Product = {
       id,

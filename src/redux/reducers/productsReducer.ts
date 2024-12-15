@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
 
 import { Product, ProductEdit } from '../../types/Product'
 import { PaginationQuery } from '../../types/PaginationQuery'
+import { API_URL } from '@/utils/constant'
 
-const API_URL = 'http://localhost:8080/api/v1/products'
 
 const initialState: {
   products: Product[]
@@ -48,26 +48,24 @@ export const editProductAsync = createAsyncThunk(
 )
 export const fetchOneProductAsync = createAsyncThunk(
   'fetchOneProductAsync',
-   async ({ id, signal }: { id: string; signal: AbortSignal }, { rejectWithValue }) => {
-  try {
-    const result = await axios.get<any, AxiosResponse<Product>>(
-      `${API_URL}/${id}`,
-      { signal }
-    )
-    return result.data
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'error occurred'
-    return rejectWithValue(message)
+  async ({ id, signal }: { id: string; signal: AbortSignal }, { rejectWithValue }) => {
+    try {
+      const result = await axios.get<any, AxiosResponse<Product>>(`${API_URL}/${id}`, { signal })
+      return result.data
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'error occurred'
+      return rejectWithValue(message)
+    }
   }
-})
+)
 const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
     clearProduct: (state) => {
-      state.product = initialState.product;
-      state.error = undefined;
-      state.isLoading = false;
+      state.product = initialState.product
+      state.error = undefined
+      state.isLoading = false
     }
   },
   extraReducers: (builder) => {
@@ -100,7 +98,7 @@ const productsSlice = createSlice({
     builder.addCase(editProductAsync.rejected, (state) => {
       state.isLoading = false
     })
-builder.addCase(fetchOneProductAsync.fulfilled, (state, action) => {
+    builder.addCase(fetchOneProductAsync.fulfilled, (state, action) => {
       state.product = action.payload
       state.isLoading = false
       state.error = undefined
@@ -122,5 +120,5 @@ builder.addCase(fetchOneProductAsync.fulfilled, (state, action) => {
 })
 
 const productReducer = productsSlice.reducer
-export const { clearProduct } = productsSlice.actions;
+export const { clearProduct } = productsSlice.actions
 export default productReducer

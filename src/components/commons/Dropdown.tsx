@@ -17,7 +17,7 @@ type DropdownProps = {
 
 const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
   ({ label, name, value, onChange, error, options }: DropdownProps, ref) => {
-  console.log("value of select ", value)
+
   return (
     <div className="mb-4">
       {label && <label className="block text-sm font-medium mb-2">{label}</label>}

@@ -1,10 +1,12 @@
-import { ProductEdit, UpdateProduct } from '@/types/Product'
+import { ProductEdit } from '@/types/Product'
+
 import {
   editProductAsync,
   fetchAllProductAsync,
   fetchOneProductAsync
 } from '../../redux/reducers/productsReducer'
 import { createStore } from '../../redux/store'
+
 import server from '../server/server'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }))
