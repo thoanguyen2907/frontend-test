@@ -14,6 +14,7 @@ import { editProductAsync } from '@/redux/reducers/productsReducer'
 import { fetchAllSocketAsync } from '@/redux/reducers/socketsReducer'
 import { ProductEdit } from '@/types/Product'
 import { API_URL } from '@/utils/constant'
+import { stat } from 'fs'
 
 const validationSchema = Yup.object({
   model: Yup.string().required('Model is required'),
@@ -83,14 +84,14 @@ export default function EditProductForm() {
   })
 
   const onSubmit = (data: ProductEdit) => {
-    const socketId = sockets.find(socket => socket.name === state.socket)?.id;
+    const socketId = data.socket;
     if (socketId) {
       const updatedData = { ...data, socket: socketId }
       dispatch(editProductAsync({ editProduct: updatedData, id }))
-      navigate(`/products/${id}`)
+      navigate("/")
     }
-  
   }
+
   if (isLoading) {
     return <p>Loading ...</p>
   }
@@ -179,6 +180,7 @@ export default function EditProductForm() {
                 label="Socket Type"
                 value={field.value}
                 options={sockets}
+               onChange={field.onChange}
                 name={'socket'}
                 error={errors.socket?.message}
               />
