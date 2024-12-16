@@ -1,140 +1,41 @@
-# Project: Frontend for E-commerce Website or Library Management System
+# CPU Cooler Application
 
-The frontend interacts with mock data stored locally in the project. In the full-stack project, this data will be connected to the backend.
+## Live Demo
+Check out the deployed application: [CPU Cooler App](https://cpu-cooler-react-app.netlify.app/)
 
-Please, do not spend time on creating your own server. use the files that are in the `./public/mock/*` We have the data ready for you. all you need is send an HTTP request to the resource. we also have an example on how to fetch all products and how to add one product. use them as a reference.
+## About
+The **CPU Cooler Application** is a web app built using **React**, **Redux**, and **TypeScript**. It offers features to explore CPU cooler options with a focus on reusable components, well-structured code, and form validation.
 
-## Option 1: Library Management System
+## Features
+### 1. Reusable Components
+- **Input**: A flexible input component for user forms.
+- **Card**: A card layout to display CPU cooler details.
+- **Dropdown**: A customizable dropdown for selection.
+- **Button**: A styled button for various interactions.
 
-### Level 1: Basic Requirements
+### 2. Organized Folder and File Structure
+- Maintains a clean and modular architecture for scalability and maintainability.
 
-Tech Stack: React, TypeScript, and Redux/Redux Toolkit. Styling: CSS/SASS or MUI.
+### 3. Navigation with React Router
+- Enables seamless page transitions and routing.
 
-**Data Sources:**
+### 4. Form Validation
+- Uses **React Hook Form** for robust form validation.
 
-- Books: id, image, title, description,author, isAvailable, bookCopiesQty
-- Borrows: id, borrowerId, bookId, borrowDate, returnDate, dueDate
-- Category: id, name
-- Authors: id, name
-- Users (as visitor or admin): id, firstName, lastName, email, password, role (visitor or admin)
+### 5. Test Coverage
+- Includes test cases for:
+  - Reducers
+  - API Thunks
+  - Actions
 
-**Pages to Create:**
-
-1. Home page with a list of books
-2. Page to show detailed of book
-3. Admin Page
-
-**Functionalities for a Visitor:**
-
-- List of books
-- Filter books by status
-- Search by title or by author
-- Borrow a book
-- Return a borrowed book
-
-**Functionalities for an Admin:**
-
-- Add a new book, update info of a book, remove a book
-
-**Deployment**
-
-- Deploy the application to Netlify and update the README file with the project information
-
-### Level 2: Additional Requirements
-
-**Authentication:**
-
-- Implement register and login functionality via email and password
-- Protect the routes based on login and admin status
-
-**Functionalities for an Admin:**
-
-- list all users, delete or block a user.
-- list all borrows
-- Add a new author, update info of an author, remove an author
-
-**Form Validation:**
-
-- Implement form validation.
-
-### Level 3: Bonus Requirement (Optional)
-
-If you have a higher skill level and finish the previous requirements before the deadline, you can tackle the following bonus tasks:
-
-- Messages, show loading, success, and error messages (e.g., when loading books list or adding new books)
-- Implement pagination feature
-- Create a Profile Page (only available if user logs in), implement editing user profile feature (user can change first name, last name)
-
-- Peer Review:
-- Review the code and implementation of 2 assignments from other participants.
-- Provide constructive feedback and suggestions for improvement.
-
-`Please note that the bonus requirements and reviews are optional and can be completed if you have additional time and advanced skills.`
-
-Happy coding!
+## Technologies Used
+- **React**: Frontend library for building user interfaces.
+- **Redux**: State management for predictable application behavior.
+- **TypeScript**: Type-safe code for better development experience.
+- **React Router**: Navigation and routing within the application.
+- **React Hook Form**: Simplified and efficient form handling.
+- **Jest**/**Testing Library**: For unit and integration testing.
 
 ---
 
-## Option 2: E-commerce Website
-
-### Level 1: Basic Requirements
-
-Tech Stack: React, TypeScript, and Redux/Redux Toolkit. Styling: CSS/SASS or MUI.
-
-**Data Sources:**
-
-- Products: id, name, description, categories, variants, sizes
-- Categories: id, name
-- Orders: id, productId, userId, purchasedAt
-- Users: id, firstName, lastName, email, password, role (visitor or admin)
-
-**Pages to Create:**
-
-1. Home page (list all the products)
-2. Product page (contain the details of a product)
-3. Admin page
-
-**Functionalities for a Visitor:**
-
-- Get list of products
-- Filter products by categories or price
-- Search products by name
-- Add products to a cart
-- Remove products from a cart
-
-**Functionalities for an Admin:**
-
-- Add a new product, update info of a product, remove a product
-
-### Level 2: Additional Requirements
-
-**Authentication:**
-
-- Implement register and login functionality via email and password
-- Protect the routes based on login and admin status
-
-**Functionalities for an Admin:**
-
-- list all users, delete or block a user.
-- list all orders
-- Add a new category, update info of a category, remove a category
-
-**Form Validation:**
-
-- Implement form validation.
-
-### Level 3: Bonus Requirement (Optional)
-
-If you have a higher skill level and finish the previous requirements before the deadline, you can tackle the following bonus tasks:
-
-- Messages, show loading, success, and error messages (e.g., when loading products list or adding new product)
-- Implement pagination feature
-- Create a Profile Page (only available if user logs in), implement editing user profile feature (user can change first name, last name)
-
-- Peer Review:
-- Review the code and implementation of 2 assignments from other participants.
-- Provide constructive feedback and suggestions for improvement.
-
-`Please note that the bonus requirements and reviews are optional and can be completed if you have additional time and advanced skills.`
-
-Happy coding!
+Feel free to clone the repository and explore the project!
