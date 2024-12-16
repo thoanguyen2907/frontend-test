@@ -55,8 +55,8 @@ describe('test async thunk actions in productsReducer', () => {
   test('Should fetch all products with pagination', async () => {
     const controller = new AbortController()
     const { signal } = controller
-    await store.dispatch(fetchAllProductAsync({ limit: 8, offset: 0, signal }))
-    expect(store.getState().productReducer.products.length).toBe(8)
+    await store.dispatch(fetchAllProductAsync({ limit: 5, offset: 0, signal }))
+    expect(store.getState().productReducer.products.length).toBe(5)
   })
   test('Should update product with id', async () => {
     const id: string = '63bc4393-553a-4777-ab43-935b13fda0e7'

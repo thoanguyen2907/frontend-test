@@ -3,10 +3,10 @@ import { setupServer } from 'msw/node'
 
 import { productsData } from '../data/productsData'
 import { Product, ProductEdit } from '@/types/Product'
-import { API_URL } from '@/utils/constant'
+import { API_URL } from '../../utils/constant'
 
 export const handlers = [
-  http.patch(`${API_URL}/:id`, async ({ request, params }) => {
+  http.patch(`${API_URL}/products/:id`, async ({ request, params }) => {
     const update = (await request.json()) as ProductEdit
     const { id } = params
     const index = productsData.findIndex((p) => p.id === id)
@@ -18,7 +18,7 @@ export const handlers = [
       })
     }
   }),
-  http.get(`${API_URL}/:id`, async ({ request, params }) => {
+  http.get(`${API_URL}/products/:id`, async ({ request, params }) => {
     const { id } = params
     const productDetail: Product = {
       id,

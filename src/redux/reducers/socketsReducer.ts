@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 
 import { PaginationQuery } from '../../types/PaginationQuery'
 import { Socket } from '@/types/Socket'
-import { API_URL } from '@/utils/constant'
+import { API_URL } from '../../utils/constant'
 
 const initialState: {
   sockets: Socket[]

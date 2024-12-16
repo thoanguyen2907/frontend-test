@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 
 import { Product, ProductEdit } from '../../types/Product'
 import { PaginationQuery } from '../../types/PaginationQuery'
-import { API_URL } from '@/utils/constant'
+import { API_URL } from '../../utils/constant'
 
 
 const initialState: {
