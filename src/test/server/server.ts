@@ -7,7 +7,6 @@ import { API_URL } from '@/utils/constant'
 
 export const handlers = [
   http.patch(`${API_URL}/:id`, async ({ request, params }) => {
-    console.log('catch the request')
     const update = (await request.json()) as ProductEdit
     const { id } = params
     const index = productsData.findIndex((p) => p.id === id)

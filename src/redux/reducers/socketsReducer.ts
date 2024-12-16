@@ -19,7 +19,7 @@ export const fetchAllSocketAsync = createAsyncThunk<Socket[], PaginationQuery>(
   async ({ limit, offset, signal }, { rejectWithValue }) => {
     try {
       const result = await axios.get<any, AxiosResponse<Socket[]>>(
-        `${API_URL}?offset=${offset}&limit=${limit}`,
+        `${API_URL}/sockets?offset=${offset}&limit=${limit}`,
         { signal }
       )
       return result.data?.details?.records

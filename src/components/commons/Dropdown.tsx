@@ -30,7 +30,7 @@ const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
       >
         {options.map((option) => (
           <option key={option.id} value={option.id}>
-            {value}
+            {option.name}
           </option>
         ))}
       </select>

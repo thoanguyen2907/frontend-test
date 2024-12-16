@@ -24,7 +24,7 @@ export const fetchAllProductAsync = createAsyncThunk<Product[], PaginationQuery>
   async ({ limit, offset, signal }, { rejectWithValue }) => {
     try {
       const result = await axios.get<any, AxiosResponse<Product[]>>(
-        `${API_URL}?offset=${offset}&limit=${limit}`,
+        `${API_URL}/products?offset=${offset}&limit=${limit}`,
         { signal }
       )
       return result.data?.details?.records
@@ -38,7 +38,7 @@ export const editProductAsync = createAsyncThunk(
   'editProductAsync',
   async ({ editProduct, id }: { editProduct: ProductEdit; id: string }, { rejectWithValue }) => {
     try {
-      const result = await axios.patch<Product>(`${API_URL}/${id}`, editProduct)
+      const result = await axios.patch<Product>(`${API_URL}/products/${id}`, editProduct)
       return result.data
     } catch (err) {
       const message = err instanceof Error ? err.message : 'error occurred'
@@ -50,7 +50,7 @@ export const fetchOneProductAsync = createAsyncThunk(
   'fetchOneProductAsync',
   async ({ id, signal }: { id: string; signal: AbortSignal }, { rejectWithValue }) => {
     try {
-      const result = await axios.get<any, AxiosResponse<Product>>(`${API_URL}/${id}`, { signal })
+      const result = await axios.get<any, AxiosResponse<Product>>(`${API_URL}/products/${id}`, { signal })
       return result.data
     } catch (err) {
       const message = err instanceof Error ? err.message : 'error occurred'

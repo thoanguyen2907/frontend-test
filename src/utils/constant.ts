@@ -1,1 +1,1 @@
-export const API_URL = 'http://localhost:8080/api/v1/products'
+export const API_URL = 'https://backend-technical-test-p9on.onrender.com/api/v1'
