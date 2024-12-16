@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { useForm, Controller } from 'react-hook-form'
@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/hooks'
 import { editProductAsync } from '@/redux/reducers/productsReducer'
 import { fetchAllSocketAsync } from '@/redux/reducers/socketsReducer'
 import { ProductEdit } from '@/types/Product'
+import { API_URL } from '@/utils/constant'
 
 const validationSchema = Yup.object({
   model: Yup.string().required('Model is required'),
@@ -57,31 +58,38 @@ export default function EditProductForm() {
   useEffect(() => {
     const controller = new AbortController()
     const { signal } = controller
-    if (state) {
-      setProduct(state)
-    }
     dispatch(fetchAllSocketAsync({ offset: 0, limit: 10, signal }))
 
     return () => {
       controller.abort()
     }
-  }, [state])
+  }, [])
+// update socket name to socket id when state sockets change => useMemo() 
+    const mappedProduct = useMemo(() => {
+    if (state && sockets.length > 0) {
+      const socket = sockets.find(socket => socket.name === state.socket); 
+      return socket ? { ...state, socket: socket.id } : state; 
+    }
+    return state;
+  }, [state, sockets]);
+
   const {
     handleSubmit,
     control,
     formState: { errors }
   } = useForm({
-    defaultValues: state,
+    defaultValues: mappedProduct,
     resolver: yupResolver(validationSchema)
   })
 
   const onSubmit = (data: ProductEdit) => {
-    const socketId = sockets.find((socket) => socket.name === data.socket)?.id
+    const socketId = sockets.find(socket => socket.name === state.socket)?.id;
     if (socketId) {
       const updatedData = { ...data, socket: socketId }
       dispatch(editProductAsync({ editProduct: updatedData, id }))
       navigate(`/products/${id}`)
     }
+  
   }
   if (isLoading) {
     return <p>Loading ...</p>

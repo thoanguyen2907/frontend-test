@@ -43,7 +43,7 @@ export default function HomePage() {
                 socket={item.socket}
                 brand={item.brand}
                 price={item.price}
-                model={item.socket}
+                model={item.model}
                 button={{ type: 'button', label: 'More Details' }}
                 onHandler={() => showDetail(item.id)}
               />

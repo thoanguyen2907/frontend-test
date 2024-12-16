@@ -14,12 +14,13 @@ export const handlers = [
       return HttpResponse.json({ ...productsData[index], ...update })
     } else {
       return HttpResponse.json({
-        status: 400
+        status: 404
       })
     }
   }),
   http.get(`${API_URL}/products/:id`, async ({ request, params }) => {
     const { id } = params
+    if(id === "a90f6a68-ac3f-48a6-95a8-31825dbfeae7"){
     const productDetail: Product = {
       id,
       brand: 'Hitech Master',
@@ -32,6 +33,26 @@ export const handlers = [
       price: 59.99
     }
     return HttpResponse.json(productDetail)
+    }
+
+   return HttpResponse.json(
+    {
+      code: 404,
+      success: false,
+      details: {
+        status: 'NOT_FOUND',
+        error: null,
+        message: 'Could not find the Id',
+      },
+      message: 'Could not find the Id',
+      error: [
+        {
+          message: 'Could not find the Id',
+        },
+      ],
+    },
+    { status: 404 }
+  );
   })
 ]
 

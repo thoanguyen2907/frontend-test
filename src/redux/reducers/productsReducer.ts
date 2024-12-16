@@ -38,6 +38,7 @@ export const editProductAsync = createAsyncThunk(
   'editProductAsync',
   async ({ editProduct, id }: { editProduct: ProductEdit; id: string }, { rejectWithValue }) => {
     try {
+
       const result = await axios.patch<Product>(`${API_URL}/products/${id}`, editProduct)
       return result.data
     } catch (err) {
@@ -51,6 +52,7 @@ export const fetchOneProductAsync = createAsyncThunk(
   async ({ id, signal }: { id: string; signal: AbortSignal }, { rejectWithValue }) => {
     try {
       const result = await axios.get<any, AxiosResponse<Product>>(`${API_URL}/products/${id}`, { signal })
+      
       return result.data
     } catch (err) {
       const message = err instanceof Error ? err.message : 'error occurred'

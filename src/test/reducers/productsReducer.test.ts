@@ -30,7 +30,8 @@ beforeEach(() => {
           numberOfFans: 1,
           price: 49.99
         }
-      ]
+      ], 
+      product: null
     }
   })
 })
@@ -106,4 +107,5 @@ describe('test async thunk actions in productsReducer', () => {
       price: 59.99
     })
   })
+
 })
