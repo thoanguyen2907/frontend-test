@@ -55,30 +55,35 @@ export default function EditProductForm() {
       controller.abort()
     }
   }, [])
-// update socket name to socket id when state sockets change => useMemo() 
-    const mappedProduct = useMemo(() => {
-    if (state && sockets.length > 0) {
-      const socket = sockets.find(socket => socket.name === state.socket); 
-      return socket ? { ...state, socket: socket.id } : state; 
-    }
-    return state;
-  }, [state, sockets]);
+
+  // key socket return as string value not id, need to map to shape: key - value pair
+  // and run for loop to check key existed? convert to socketId
+  const converNameToId = useMemo(() => {
+    const mapSocketData = new Map()
+    sockets.forEach((socket) => {
+      mapSocketData.set(socket.name, socket.id)
+    })
+    return mapSocketData
+  }, [sockets])
 
   const {
     handleSubmit,
     control,
     formState: { errors }
   } = useForm({
-    defaultValues: mappedProduct,
+    defaultValues: state,
     resolver: yupResolver(validationSchema)
   })
 
   const onSubmit = (data: ProductEdit) => {
-    const socketId = data.socket;
+    let socketId = data.socket
     if (socketId) {
+      if (converNameToId.has(socketId)) {
+        socketId = converNameToId.get(socketId)
+      }
       const updatedData = { ...data, socket: socketId }
       dispatch(editProductAsync({ editProduct: updatedData, id }))
-      navigate("/")
+      navigate('/')
     }
   }
 
@@ -170,7 +175,7 @@ export default function EditProductForm() {
                 label="Socket Type"
                 value={field.value}
                 options={sockets}
-               onChange={field.onChange}
+                onChange={field.onChange}
                 name={'socket'}
                 error={errors.socket?.message}
               />
