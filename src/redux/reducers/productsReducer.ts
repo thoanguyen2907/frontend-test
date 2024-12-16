@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
 
-import { Product, ProductEdit } from '../../types/Product'
+import { Product, ProductEdit, ProductResponse } from '../../types/Product'
 import { PaginationQuery } from '../../types/PaginationQuery'
 import { API_URL } from '../../utils/constant'
 
@@ -23,7 +23,7 @@ export const fetchAllProductAsync = createAsyncThunk<Product[], PaginationQuery>
   'fetchAllProductAsync',
   async ({ limit, offset, signal }, { rejectWithValue }) => {
     try {
-      const result = await axios.get<any, AxiosResponse<Product[]>>(
+      const result = await axios.get<any, AxiosResponse<ProductResponse>>(
         `${API_URL}/products?offset=${offset}&limit=${limit}`,
         { signal }
       )
@@ -36,7 +36,7 @@ export const fetchAllProductAsync = createAsyncThunk<Product[], PaginationQuery>
 )
 export const editProductAsync = createAsyncThunk(
   'editProductAsync',
-  async ({ editProduct, id }: { editProduct: ProductEdit; id: string }, { rejectWithValue }) => {
+  async ({ editProduct, id }: { editProduct: ProductEdit; id: string | undefined }, { rejectWithValue }) => {
     try {
 
       const result = await axios.patch<Product>(`${API_URL}/products/${id}`, editProduct)
