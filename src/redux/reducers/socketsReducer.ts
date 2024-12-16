@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios, { AxiosResponse } from 'axios'
 
 import { PaginationQuery } from '../../types/PaginationQuery'
-import { Socket } from '@/types/Socket'
+import { Socket, SocketResponse } from '@/types/Socket'
 import { API_URL } from '../../utils/constant'
 
 const initialState: {
@@ -18,11 +18,11 @@ export const fetchAllSocketAsync = createAsyncThunk<Socket[], PaginationQuery>(
   'fetchAllSocketAsync',
   async ({ limit, offset, signal }, { rejectWithValue }) => {
     try {
-      const result = await axios.get<any, AxiosResponse<Socket[]>>(
+      const result = await axios.get<any, AxiosResponse<SocketResponse>>(
         `${API_URL}/sockets?offset=${offset}&limit=${limit}`,
         { signal }
       )
-      return result.data?.details?.records
+      return result.data?.details.records
     } catch (err) {
       const message = err instanceof Error ? err.message : 'error occurred'
       return rejectWithValue(message)
