@@ -37,16 +37,6 @@ const validationSchema = Yup.object({
 })
 
 export default function EditProductForm() {
-  const [product, setProduct] = useState<ProductEdit>({
-    brand: '',
-    model: '',
-    socket: '',
-    fanSize: 0,
-    fanSpeed: 0,
-    fanNoiseLevel: 0,
-    numberOfFans: 0,
-    price: 0
-  })
   const { isLoading } = useAppSelector((state) => state.productReducer)
   const { sockets } = useAppSelector((state) => state.socketReducer)
 

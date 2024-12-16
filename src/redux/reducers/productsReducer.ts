@@ -38,7 +38,6 @@ export const editProductAsync = createAsyncThunk(
   'editProductAsync',
   async ({ editProduct, id }: { editProduct: ProductEdit; id: string | undefined }, { rejectWithValue }) => {
     try {
-
       const result = await axios.patch<Product>(`${API_URL}/products/${id}`, editProduct)
       return result.data
     } catch (err) {
